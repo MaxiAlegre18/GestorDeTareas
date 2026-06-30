@@ -1,0 +1,20 @@
+services:
+  # Base de datos PostgreSQL
+  db:
+    # La Imagen de Postgres a utilizar (la ultima)
+    image: postgres:latest
+     
+    # Los puertos a exponer al host container
+    ports:
+    
+    # Puerto 5432 es el puerto por defecto de postgres, esta mapeado al puerto 5432 del host
+      - "5432:5432"
+
+    # Si ocurre algun error, Docker Compose lo reiniciara
+    restart: always
+
+    # El contenedor PostgreSQL usa variables de entorno para leer la configuracion. 
+
+    environment:
+      - POSTGRES_PASSWORD=changemeinprod!
+      - TZ=America/Argentina/Buenos_Aires
