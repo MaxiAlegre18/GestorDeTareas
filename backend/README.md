@@ -54,3 +54,5 @@ Se necesita un mapeador que mapee los DTO con las entidades reales, para ello ha
 
 Si se implementa a mano, lo ideal seria tener una interfaz que tenga los metodos que deba poseer las implementaciones.
 
+Como debemos inyectar esta clase en nuestra API, debemos anotarla con la anotación estereotipo @Component (spring inyectara un bean de esta clase al Spring Context)
+
