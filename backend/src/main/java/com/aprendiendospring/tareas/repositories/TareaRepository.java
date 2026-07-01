@@ -5,12 +5,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
 import com.aprendiendospring.tareas.domain.entidades.Tarea;
 
-@Repository
-public interface RepositorioTarea extends JpaRepository<Tarea, UUID> {
+public interface TareaRepository extends JpaRepository<Tarea, UUID> {
 
     List<Tarea> encontrarPorListaDeTareaId(UUID idListaDeTarea);
 

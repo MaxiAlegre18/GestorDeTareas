@@ -3,7 +3,7 @@ package com.aprendiendospring.tareas.mappers;
 import com.aprendiendospring.tareas.domain.dto.TareaDTO;
 import com.aprendiendospring.tareas.domain.entidades.Tarea;
 
-public interface MapeadorTarea {
+public interface TareaMapper {
 
     Tarea convertirDesdeDTO(TareaDTO tareaDTO);
 

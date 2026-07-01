@@ -9,17 +9,17 @@ import com.aprendiendospring.tareas.domain.dto.ListaDeTareaDTO;
 import com.aprendiendospring.tareas.domain.entidades.EstadoTarea;
 import com.aprendiendospring.tareas.domain.entidades.ListaDeTarea;
 import com.aprendiendospring.tareas.domain.entidades.Tarea;
-import com.aprendiendospring.tareas.mappers.MapeadorListaDeTarea;
-import com.aprendiendospring.tareas.mappers.MapeadorTarea;
+import com.aprendiendospring.tareas.mappers.ListaDeTareaMapper;
+import com.aprendiendospring.tareas.mappers.TareaMapper;
 
 @Component
-public class MapeadorListaDeTareaImpl implements MapeadorListaDeTarea {
+public class ListaDeTareaMapperImpl implements ListaDeTareaMapper {
 
-    private final MapeadorTarea mapeadorTarea;
+    private final TareaMapper mapeadorTarea;
 
     // Como esta clase esta marcada con @Component, durante la ejecucion, Spring le
     // inyectara un bean de MapeadorTarea
-    public MapeadorListaDeTareaImpl(MapeadorTarea mapeadorTarea) {
+    public ListaDeTareaMapperImpl(TareaMapper mapeadorTarea) {
         this.mapeadorTarea = mapeadorTarea;
     }
 

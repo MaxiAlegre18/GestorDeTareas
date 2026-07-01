@@ -68,3 +68,6 @@ Por ejemplo:
 public interface RepositorioListaDeTarea extends JpaRepository<ListaDeTarea, UUID>
 
 Si se necesita queries especificas, se debe crear los métodos necesarios (encontrarPorId)
+
+6. Endpoints
+A partir de aqui se puede crear los endpoints necesarios, para ello, se recomienda desacoplar la logica de negocio (Services) con los Endpoints (Controllers)

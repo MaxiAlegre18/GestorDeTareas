@@ -4,10 +4,10 @@ import org.springframework.stereotype.Component;
 
 import com.aprendiendospring.tareas.domain.dto.TareaDTO;
 import com.aprendiendospring.tareas.domain.entidades.Tarea;
-import com.aprendiendospring.tareas.mappers.MapeadorTarea;
+import com.aprendiendospring.tareas.mappers.TareaMapper;
 
 @Component
-public class MapeadorTareaImpl implements MapeadorTarea {
+public class TareaMapperImpl implements TareaMapper {
 
     @Override
     public Tarea convertirDesdeDTO(TareaDTO tareaDTO) {

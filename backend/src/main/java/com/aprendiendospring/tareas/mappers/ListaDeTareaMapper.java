@@ -3,7 +3,7 @@ package com.aprendiendospring.tareas.mappers;
 import com.aprendiendospring.tareas.domain.dto.ListaDeTareaDTO;
 import com.aprendiendospring.tareas.domain.entidades.ListaDeTarea;
 
-public interface MapeadorListaDeTarea {
+public interface ListaDeTareaMapper {
 
     ListaDeTarea convertirDesdeDTO(ListaDeTareaDTO listaDeTareaDTO);
 
