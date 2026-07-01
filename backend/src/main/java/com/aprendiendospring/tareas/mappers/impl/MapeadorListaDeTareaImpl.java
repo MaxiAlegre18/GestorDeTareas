@@ -62,9 +62,7 @@ public class MapeadorListaDeTareaImpl implements MapeadorListaDeTarea {
         if (null == tareas) {
             return null;
         }
-
         long cantidadTareasCerradas = tareas.stream().filter(tarea -> EstadoTarea.CERRADO == tarea.getEstado()).count();
-
         return (double) cantidadTareasCerradas / tareas.size();
     }
 

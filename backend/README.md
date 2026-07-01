@@ -60,3 +60,11 @@ Al implementar, ¡Tener en cuenta cuales atributos pueden ser nulos en las entid
 
 Si hay alguna logica extra (como calcular cantidad de elementos de una lista de una entidad) se puede realizar en el mapper
 
+5. Persistencia
+Necesitamos crear interfaces @Repository para poder persistir y obtener datos de la base de datos. La interfaz debe extender JpaRepository<Entidad, TipoID> para poder ser proveida con las propiedades CRUD
+
+Por ejemplo:
+@Repository
+public interface RepositorioListaDeTarea extends JpaRepository<ListaDeTarea, UUID>
+
+Si se necesita queries especificas, se debe crear los métodos necesarios (encontrarPorId)
