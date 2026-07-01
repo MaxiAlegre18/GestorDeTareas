@@ -56,3 +56,7 @@ Si se implementa a mano, lo ideal seria tener una interfaz que tenga los metodos
 
 Como debemos inyectar esta clase en nuestra API, debemos anotarla con la anotación estereotipo @Component (spring inyectara un bean de esta clase al Spring Context)
 
+Al implementar, ¡Tener en cuenta cuales atributos pueden ser nulos en las entidades!
+
+Si hay alguna logica extra (como calcular cantidad de elementos de una lista de una entidad) se puede realizar en el mapper
+
