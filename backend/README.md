@@ -67,7 +67,18 @@ Por ejemplo:
 @Repository
 public interface RepositorioListaDeTarea extends JpaRepository<ListaDeTarea, UUID>
 
-Si se necesita queries especificas, se debe crear los métodos necesarios (encontrarPorId)
+Si se necesita queries especificas, se debe crear los métodos necesarios (encontrarPorId) y teniendo en cuenta que:
+Spring utiliza una característica llamada Query Methods (métodos de consulta), que autogenera las consultas SQL a la base de datos basándose en palabras clave en inglés dentro del nombre del método (como findBy, And, Or, etc.).
+
+
+
 
 6. Endpoints
 A partir de aqui se puede crear los endpoints necesarios, para ello, se recomienda desacoplar la logica de negocio (Services) con los Endpoints (Controllers)
+
+
+
+
+Final:
+Para ejecutar la aplicación:
+docker-compse up

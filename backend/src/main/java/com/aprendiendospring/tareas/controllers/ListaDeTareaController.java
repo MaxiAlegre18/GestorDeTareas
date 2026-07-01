@@ -12,7 +12,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
-@RequestMapping(path = "/listas-de-tarea")
+@RequestMapping(path = "/task-lists")
 public class ListaDeTareaController {
 
     private final ListaDeTareaService listaDeTareaService;

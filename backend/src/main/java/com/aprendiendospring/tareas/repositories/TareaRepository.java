@@ -9,8 +9,8 @@ import com.aprendiendospring.tareas.domain.entidades.Tarea;
 
 public interface TareaRepository extends JpaRepository<Tarea, UUID> {
 
-    List<Tarea> encontrarPorListaDeTareaId(UUID idListaDeTarea);
+    List<Tarea> findByListaDeTareaId(UUID idListaDeTarea);
 
-    Optional<Tarea> encontrarPorListaDeTareaIdYTareaId(UUID idListaDeTarea, UUID id);
+    Optional<Tarea> findByListaDeTareaIdAndId(UUID idListaDeTarea, UUID id);
 
 }
