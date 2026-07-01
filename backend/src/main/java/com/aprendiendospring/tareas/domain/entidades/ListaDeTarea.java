@@ -1,29 +1,25 @@
-package com.aprendiendospring.domain.entidades;
+package com.aprendiendospring.tareas.domain.entidades;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-// Entity marca la clase como una entidad JPA
 @Entity
-// Permite especificar el nombre de la tabla de la base de datos
-@Table(name = "tareas")
-public class Tarea {
+@Table(name = "lista_de_tareas")
+public class ListaDeTarea {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    // Todo el tiempo que creemos una tarea con un id == null, JPA generara
-    // automaticamente un UUID y este sera el valor de la variable
-    @Column(name = "id", updatable = false, nullable = false)
+    @Column(name = "id", nullable = false, updatable = false)
     private UUID id;
 
     @Column(name = "titulo", nullable = false)
@@ -32,21 +28,15 @@ public class Tarea {
     @Column(name = "descripcion")
     private String descripcion;
 
-    @Column(name = "fecha_expiracion")
-    private LocalDateTime fechaExpiracion;
-
-    @Column(name = "estado", nullable = false)
-    private EstadoTarea estado;
-
-    @Column(name = "prioridad", nullable = false)
-    private PrioridadTarea prioridad;
-
-    // FetchType.LAZY: La lista de tareas no sera obtenida de la base de datos a
-    // menos que sea requerida
-    @ManyToOne(fetch = FetchType.LAZY)
-    // Especifica el nombre de la columna de la FK de lista de tarea
-    @JoinColumn(name = "lista_de_tarea_id")
-    private ListaDeTarea listaDeTarea;
+    // El atributo mappedBy indica la variable que tendra a la "FK" de la relacion
+    // Cascade son operaciones cascada que son tareas que se replican en las tareas
+    // hijas
+    // En este caso, si la lista la elimino de la base de datos, todas las tareas
+    // asociadas a esta lista se borraran
+    // Con PERSIST, al crear una nueva lista y la añado tareas nuevas a la lista,
+    // todas las tareas nuevas se guardan automaticamente en la base de datos
+    @OneToMany(mappedBy = "listaDeTarea", cascade = { CascadeType.REMOVE, CascadeType.PERSIST })
+    private List<Tarea> tareas;
 
     @Column(name = "creado", nullable = false)
     private LocalDateTime creado;
@@ -54,19 +44,16 @@ public class Tarea {
     @Column(name = "actualizado", nullable = false)
     private LocalDateTime actualizado;
 
-    public Tarea() {
+    public ListaDeTarea() {
 
     }
 
-    public Tarea(UUID id, String titulo, String descripcion, LocalDateTime fechaExpiracion, EstadoTarea estado,
-            PrioridadTarea prioridad, ListaDeTarea listaDeTarea, LocalDateTime creado, LocalDateTime actualizado) {
+    public ListaDeTarea(UUID id, String titulo, String descripcion, List<Tarea> tareas, LocalDateTime creado,
+            LocalDateTime actualizado) {
         this.id = id;
         this.titulo = titulo;
         this.descripcion = descripcion;
-        this.fechaExpiracion = fechaExpiracion;
-        this.estado = estado;
-        this.prioridad = prioridad;
-        this.listaDeTarea = listaDeTarea;
+        this.tareas = tareas;
         this.creado = creado;
         this.actualizado = actualizado;
     }
@@ -95,36 +82,12 @@ public class Tarea {
         this.descripcion = descripcion;
     }
 
-    public LocalDateTime getFechaExpiracion() {
-        return fechaExpiracion;
+    public List<Tarea> getTareas() {
+        return tareas;
     }
 
-    public void setFechaExpiracion(LocalDateTime fechaExpiracion) {
-        this.fechaExpiracion = fechaExpiracion;
-    }
-
-    public EstadoTarea getEstado() {
-        return estado;
-    }
-
-    public void setEstado(EstadoTarea estado) {
-        this.estado = estado;
-    }
-
-    public PrioridadTarea getPrioridad() {
-        return prioridad;
-    }
-
-    public void setPrioridad(PrioridadTarea prioridad) {
-        this.prioridad = prioridad;
-    }
-
-    public ListaDeTarea getListaDeTarea() {
-        return listaDeTarea;
-    }
-
-    public void setListaDeTarea(ListaDeTarea listaDeTarea) {
-        this.listaDeTarea = listaDeTarea;
+    public void setTareas(List<Tarea> tareas) {
+        this.tareas = tareas;
     }
 
     public LocalDateTime getCreado() {
@@ -150,10 +113,7 @@ public class Tarea {
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
         result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
-        result = prime * result + ((fechaExpiracion == null) ? 0 : fechaExpiracion.hashCode());
-        result = prime * result + ((estado == null) ? 0 : estado.hashCode());
-        result = prime * result + ((prioridad == null) ? 0 : prioridad.hashCode());
-        result = prime * result + ((listaDeTarea == null) ? 0 : listaDeTarea.hashCode());
+        result = prime * result + ((tareas == null) ? 0 : tareas.hashCode());
         result = prime * result + ((creado == null) ? 0 : creado.hashCode());
         result = prime * result + ((actualizado == null) ? 0 : actualizado.hashCode());
         return result;
@@ -167,7 +127,7 @@ public class Tarea {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Tarea other = (Tarea) obj;
+        ListaDeTarea other = (ListaDeTarea) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -183,19 +143,10 @@ public class Tarea {
                 return false;
         } else if (!descripcion.equals(other.descripcion))
             return false;
-        if (fechaExpiracion == null) {
-            if (other.fechaExpiracion != null)
+        if (tareas == null) {
+            if (other.tareas != null)
                 return false;
-        } else if (!fechaExpiracion.equals(other.fechaExpiracion))
-            return false;
-        if (estado != other.estado)
-            return false;
-        if (prioridad != other.prioridad)
-            return false;
-        if (listaDeTarea == null) {
-            if (other.listaDeTarea != null)
-                return false;
-        } else if (!listaDeTarea.equals(other.listaDeTarea))
+        } else if (!tareas.equals(other.tareas))
             return false;
         if (creado == null) {
             if (other.creado != null)
@@ -212,9 +163,8 @@ public class Tarea {
 
     @Override
     public String toString() {
-        return "Tarea [id=" + id + ", titulo=" + titulo + ", descripcion=" + descripcion + ", fechaExpiracion="
-                + fechaExpiracion + ", estado=" + estado + ", prioridad=" + prioridad + ", listaDeTarea=" + listaDeTarea
+        return "ListaDeTarea [id=" + id + ", titulo=" + titulo + ", descripcion=" + descripcion + ", tareas=" + tareas
                 + ", creado=" + creado + ", actualizado=" + actualizado + "]";
-    }
+    };
 
 }
